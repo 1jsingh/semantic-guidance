@@ -4,5 +4,7 @@ output
 .DS_Store
 .idea/
 baseline_spc
-semantic_guidance/test*
+semantic_guidance/test_v2*
+semantic_guidance/test_copy*
 files
+semantic_guidance/pretrained_models

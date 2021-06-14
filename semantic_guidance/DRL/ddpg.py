@@ -59,12 +59,12 @@ class DDPG(object):
         # setup local and target actor, critic networks
         # input: target, canvas, stepnum, coordconv + gbp 3 + 3 + 1 + 2
         # output: (10+3)*5 (action bundle)
-        self.actor = ResNet(9 + use_gbp + use_bilevel + 2, 18, 13 * bundle_size * (1 + use_bilevel), self.high_res)
-        self.actor_target = ResNet(9 + use_gbp + use_bilevel + 2, 18, 13 * bundle_size * (1 + use_bilevel),
+        self.actor = ResNet(9 + use_gbp + use_bilevel + 2*use_bilevel, 18, 13 * bundle_size * (1 + use_bilevel), self.high_res)
+        self.actor_target = ResNet(9 + use_gbp + use_bilevel + 2*use_bilevel, 18, 13 * bundle_size * (1 + use_bilevel),
                                    self.high_res)
-        self.critic = ResNet_wobn(3 + 9 + use_gbp + use_bilevel + 2, 18, 1,
+        self.critic = ResNet_wobn(3 + 9 + use_gbp + use_bilevel + 2*use_bilevel, 18, 1,
                                   self.high_res)  # add the last canvas for better prediction
-        self.critic_target = ResNet_wobn(3 + 9 + use_gbp + use_bilevel + 2, 18, 1, self.high_res)
+        self.critic_target = ResNet_wobn(3 + 9 + use_gbp + use_bilevel + 2*use_bilevel, 18, 1, self.high_res)
 
         for param in self.actor_target.parameters():
             param.requires_grad = False
