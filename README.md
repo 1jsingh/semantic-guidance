@@ -74,7 +74,7 @@ data
 
 ### Training
 
-* Train the baseline model from [Huang el al. 2019](https://arxiv.org/abs/1903.04411)
+* Train the baseline model from [Huang et al. 2019](https://arxiv.org/abs/1903.04411)
 ```bash
 cd semantic_guidance
 python train.py \
@@ -102,7 +102,7 @@ python train.py \
 
 # Citation
 
-If you use / discuss ideas from the semantic guidance pipeline in your work, please cite our paper:
+If you find this work useful in your research, please cite our paper:
 ```
 @inproceedings{singh2021combining,
   title={Combining Semantic Guidance and Deep Reinforcement Learning For Generating Human Level Paintings},
