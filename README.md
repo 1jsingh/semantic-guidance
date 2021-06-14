@@ -45,15 +45,17 @@ data
 │       └── images.txt
 ```
 
-* Download the [pretrained model]() for object localization and semantic segmentation. Place it in the root directory of the repo.
+* Download differentiable neural renderer: [renderer.pkl](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EWdoJgGzUJtEt1Qc_LkS9DwBj-bwem_I2BMT-W4VzcEuNw?e=3MUUBL) and place it in the `data/.` folder.
+
+* Download combined model for object localization and semantic segmentation from [here](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EbzRihTmKhtAjlXW-U5l8sUB751nZDGJQ4qXF4dk2wVV3A?e=yO0WGM), and place it in place it in the `data/.` folder.
 
 * Run the preprocessing script to generate object localization, semantic segmentation and bounding box predictions.
 ```bash
-cd semantic-guidance
+cd semantic_guidance
 python preprocess.py
 ```
 
-* **OR** you can also directly download the preprocessed dataset from [here](), and place the prediction folders in the original data directory. The final data directory should look like:
+* **OR** you can also directly download the preprocessed birds dataset from [here](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EY0RrfqyE2FEsaWFyBm5Mt4BUDc8M7d7XjarBKsU3SXqEQ), and place the prediction folders in the original data directory. The final data directory should look like:
 ```bash
 data
 ├── cub200/
@@ -66,20 +68,36 @@ data
 │             └── ...
 │       └── bounding_boxes_pred.txt
 │       └── images.txt
+└── renderer.pkl
+└── birds_obj_seg.pkl
 ```
 
 ### Training
 
 * Train the baseline model from [Huang el al. 2019](https://arxiv.org/abs/1903.04411)
 ```bash
-cd semantic-guidance
-python train.py --dataset cub200 --debug --batch_size=96 --max_eps_len 50  --bundle_size=5 --exp_suffix baseline
+cd semantic_guidance
+python train.py \
+--dataset cub200 \
+--debug \
+--batch_size=96 \
+--max_eps_len=50  \
+--bundle_size=5 \
+--exp_suffix baseline
 ```
 
 * Train the deep reinforcement learning based painting agent using Semantic Guidance pipeline.
 ```bash
-cd semantic-guidance
-python train.py --dataset cub200 --debug --batch_size=96 --max_eps_len 50  --bundle_size=3 --use_gbp --use_bilevel --exp_suffix semantic-guidance
+cd semantic_guidance
+python train.py \
+--dataset cub200 \
+--debug \
+--batch_size=96 \
+--max_eps_len=50  \
+--bundle_size=5 \
+--use_bilevel \
+--use_gbp \
+--exp_suffix semantic-guidance
 ```
 
 # Citation
@@ -94,6 +112,6 @@ If you use / discuss ideas from the semantic guidance pipeline in your work, ple
 }
 ```
 
-# Under Construction
+<!-- # Under Construction
 
-This repository is under construction. Code and pretrained models would be added soon!
+This repository is under construction. Code and pretrained models would be added soon! -->
