@@ -1,0 +1,7 @@
+data
+output
+video
+.DS_Store
+.idea/
+baseline_spc
+semantic_guidance/test*
