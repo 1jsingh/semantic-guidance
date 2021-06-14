@@ -259,6 +259,11 @@ if __name__ == "__main__":
     # parse args
     args = parser.parse_args()
 
+    # if using bilevel painting procedure than use only half of brush strokes for foreground
+    # and rest for background
+    if args.use_bilevel:
+        args.bundle_size = int(np.ceil(args.bundle_size/2))
+
     # log directory
     exp_type = os.path.abspath('.').split('/')[-1]
     LOG_DIR = "../train_log/{}/".format(exp_type)

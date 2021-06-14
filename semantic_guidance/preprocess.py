@@ -39,7 +39,7 @@ def get_model_instance_segmentation(num_classes):
 num_classes = 2
 # load pretrained object localization and semantic segmentation model
 model = get_model_instance_segmentation(num_classes)
-model.load_state_dict(torch.load('../birds_obj_seg_v3.pkl', map_location={'cuda:0': 'cpu'}))
+model.load_state_dict(torch.load('../data/birds_obj_seg.pkl', map_location={'cuda:0': 'cpu'}))
 model.to(device)
 model.eval()
 
@@ -154,8 +154,8 @@ pred_bbox_data = []
 GBP = GuidedBackprop(expert_model.pretrained_model)
 
 # create output directories for storing data
-gbp_dir = '../data/cub200/CUB_200_2011/gbp_global2/'
-segmentations_dir = '../data/cub200/CUB_200_2011/segmentations_pred2/'
+gbp_dir = '../data/cub200/CUB_200_2011/gbp_global/'
+segmentations_dir = '../data/cub200/CUB_200_2011/segmentations_pred/'
 if not os.path.exists(gbp_dir):
     os.makedirs(gbp_dir)
 if not os.path.exists(segmentations_dir):
@@ -178,7 +178,10 @@ for choose in range(len(img_list)):
     # df_.iloc[choose]['w'] = w - x
     # df_.iloc[choose]['h'] = h - y
 
-    seg_name = "{}/segmentations_pred2/{}".format(img_name[:24], img_name[32:])
+    path_list = img_name.split('/')
+    path_list[-3] = 'segmentations_pred'
+    seg_name = '/'.join(path_list)
+    # seg_name = "{}/segmentations_pred2/{}".format(img_name[:24], img_name[32:])
     if not os.path.exists(os.path.dirname(seg_name)):
         os.makedirs(os.path.dirname(seg_name))
     cv2.imwrite(seg_name, seg_mask)
@@ -208,7 +211,9 @@ for choose in range(len(img_list)):
     w, h = min(w, W), min(h, H)
     gbp_global[y:h, x:w] = gbp
 
-    gbp_name = "{}/gbp_global2/{}".format(img_name[:24], img_name[32:])
+    path_list = img_name.split('/')
+    path_list[-3] = 'gbp_global'
+    gbp_name = '/'.join(path_list)
     if not os.path.exists(os.path.dirname(gbp_name)):
         os.makedirs(os.path.dirname(gbp_name))
     cv2.imwrite(gbp_name, gbp_global)
@@ -218,4 +223,4 @@ for choose in range(len(img_list)):
 
 # save bounding box predictions
 df_ = pd.DataFrame(data=pred_bbox_data, columns=['x', 'y', 'w', 'h'])
-df_.to_csv('../data/cub200/CUB_200_2011/bounding_boxes_pred2.txt', sep=' ')
+df_.to_csv('../data/cub200/CUB_200_2011/bounding_boxes_pred.txt', sep=' ')

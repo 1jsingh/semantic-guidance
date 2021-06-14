@@ -1,7 +1,8 @@
 data
 output
-video
+#video
 .DS_Store
 .idea/
 baseline_spc
 semantic_guidance/test*
+files
