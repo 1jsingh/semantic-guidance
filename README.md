@@ -1,4 +1,4 @@
-## Semantic-Guidance
+## Semantic-Guidance: Distilling Object Awareness into Paintings
 This repository contains code for our CVPR-2021 paper on [Combining Semantic Guidance and Deep Reinforcement Learning For Generating Human Level Paintings](https://arxiv.org/pdf/2011.12589.pdf).
 
 The Semantic Guidance pipeline distills different forms of object awareness (semantic segmentation, object localization and guided backpropagation maps) into the painting process itself. The resulting agent is able to paint canvases with increased saliency of foreground objects and enhanced granularity of key image features.
@@ -12,6 +12,7 @@ To this end, we propose a Semantic Guidance pipeline with **1)** a bi-level pain
 * [Environment Setup](#environment-setup)
 * [Dataset and Preprocessing](#dataset-and-preprocessing)
 * [Training](#training)
+* [Testing using Pretrained Models](#testing-using-pretrained-models)
 * [Citation](#citation)
 
 
@@ -99,6 +100,37 @@ python train.py \
 --use_gbp \
 --exp_suffix semantic-guidance
 ```
+
+### Testing using Pretrained Models
+
+* Download the pretrained models for the [Baseline](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EWoJ8_jprlRNvZegNCnBEnkBiLNG3SQKXPm119yJjB1mVg?e=HzK4sA) and [Semantic Guidance](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EeUqajWhphlOg3EzXC8qYc8B090FMd2GYHSmjCdJ6bnmnA?e=cOTIHJ) agents. Place the downloaded models in `./semantic_guidance/pretrained_models` directory.
+```bash
+semantic-guidance
+├── semantic_guidance/
+│   └── pretrained_models/
+│       └── actor_baseline.pkl
+│       └── actor_semantic_guidance.pkl
+```
+
+* Generate the painting sequence using pretrained baseline agent.
+```bash
+cd semantic_guidance
+python test.py \
+--img ../input/target_bird_4648.png \
+--actor pretrained_models/actor_baseline.pkl \
+--use_baseline
+```
+
+* Use the pretrained Semantic Guidance agent to paint canvases.
+```bash
+cd semantic_guidance
+python test.py \
+--img ../input/target_bird_4648.png \
+--actor pretrained_models/actor_semantic_guidance.pkl 
+```
+
+* The `test` script stores the final canvas state in the `./output` folder and saves a video for the painting sequence in the `./video` directory.
+
 
 # Citation
 
