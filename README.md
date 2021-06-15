@@ -1,4 +1,5 @@
-## Semantic-Guidance: Distilling Object Awareness into Paintings
+## Semantic-Guidance: Distilling Object Awareness into Paintings [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Automatically%20generate%20human-level%20paintings%20using%20a%20combination%20of%20Deep-RL%20and%20Semantic-Guidance&url=https://github.com/1jsingh/semantic-guidance&&hashtags=LearningToPaint,CVPR2021)
+
 This repository contains code for our CVPR-2021 paper on [Combining Semantic Guidance and Deep Reinforcement Learning For Generating Human Level Paintings](https://arxiv.org/pdf/2011.12589.pdf).
 
 The Semantic Guidance pipeline distills different forms of object awareness (semantic segmentation, object localization and guided backpropagation maps) into the painting process itself. The resulting agent is able to paint canvases with increased saliency of foreground objects and enhanced granularity of key image features.

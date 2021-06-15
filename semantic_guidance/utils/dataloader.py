@@ -58,6 +58,7 @@ class ImageDataset:
         # read rgb image
         img_name = self.img_list[idx]
         image = cv2.cvtColor(cv2.imread(img_name), cv2.COLOR_BGR2RGB)
+        H, W, C = image.shape
         image = cv2.resize(image, (self.width, self.width))
         # image = adjust_gamma(image, gamma=1.5)
         if flip_horizontal:
@@ -88,7 +89,6 @@ class ImageDataset:
 
             # create grid
             x, y, w, h = self.bbox_list[idx]
-            H, W, C = image.shape
             x, y, w, h = x / W, y / H, w / W, h / H
             if flip_horizontal:
                 x = 1 - x - w
