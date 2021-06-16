@@ -229,10 +229,12 @@ class DDPG(object):
             canvas0_ = torch.nn.functional.grid_sample(canvas0 * seggt, grid_.permute(0, 2, 3, 1))
             # gt_, canvas0_, canvas1_ = self.nalignment(gt,canvas0_,canvas1_)
             gt_ = torch.nn.functional.grid_sample(gt * seggt, grid_.permute(0, 2, 3, 1))
-
-        foreground_reward = self.wgan.cal_reward(canvas1_, gt_) - self.wgan.cal_reward(canvas0_, gt_)
-        # foreground_reward = ((canvas0_ - gt_) ** 2).mean(1).mean(1).mean(1) - ((canvas1_ - gt_) ** 2).mean(1).mean(1).mean(1)
-        foreground_reward = 2e0 * foreground_reward.view(-1)
+            # compute foreground reward
+            foreground_reward = self.wgan.cal_reward(canvas1_, gt_) - self.wgan.cal_reward(canvas0_, gt_)
+            # foreground_reward = ((canvas0_ - gt_) ** 2).mean(1).mean(1).mean(1) - ((canvas1_ - gt_) ** 2).mean(1).mean(1).mean(1)
+            foreground_reward = 2e0 * foreground_reward.view(-1)
+        else:
+            foreground_reward = torch.tensor(0.)
 
         # total reward
         total_reward = bg_reward + gbp_reward + foreground_reward

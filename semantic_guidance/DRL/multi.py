@@ -22,6 +22,8 @@ class fastenv:
         self.test = False
         self.log = 0
         self.gpu = gpu
+        self.use_gbp = use_gbp
+        self.use_bilevel = use_bilevel
 
     def nalignment(self, gt, canvas0):
         gt_ = (gt - self.mean) / self.std
@@ -43,12 +45,13 @@ class fastenv:
                     canvas = util.to_numpy(self.env.canvas[i, :3].permute(1, 2, 0))
                     self.writer.add_image('{}/canvas_{}.png'.format(str(self.env.imgid[i]), str(step)), canvas, log)
             if step == self.max_episode_length:
-                # z_gt, z_canvas = self.nalignment(self.env.gt[:,:3].float() / 255,self.env.canvas[:,:3].float() / 255)
-                grid = self.env.grid[:, :2].float() / 255
-                grid = 2 * grid - 1
-                z_gt = torch.nn.functional.grid_sample(self.env.gt[:, :3].float() / 255, grid.permute(0, 2, 3, 1))
-                z_canvas = torch.nn.functional.grid_sample(self.env.canvas[:, :3].float() / 255,
-                                                           grid.permute(0, 2, 3, 1))
+                if self.use_bilevel:
+                    # z_gt, z_canvas = self.nalignment(self.env.gt[:,:3].float() / 255,self.env.canvas[:,:3].float() / 255)
+                    grid = self.env.grid[:, :2].float() / 255
+                    grid = 2 * grid - 1
+                    z_gt = torch.nn.functional.grid_sample(self.env.gt[:, :3].float() / 255, grid.permute(0, 2, 3, 1))
+                    z_canvas = torch.nn.functional.grid_sample(self.env.canvas[:, :3].float() / 255,
+                                                               grid.permute(0, 2, 3, 1))
                 for i in range(self.nenv):
                     if self.env.imgid[i] < 50:
                         # write background images
@@ -56,11 +59,12 @@ class fastenv:
                         canvas = util.to_numpy(self.env.canvas[i, :3].permute(1, 2, 0))
                         self.writer.add_image(str(self.env.imgid[i]) + '/_target.png', gt, log)
                         self.writer.add_image(str(self.env.imgid[i]) + '/_canvas.png', canvas, log)
-                        # # also write foreground images
-                        gt = util.to_numpy(z_gt[i, :3].permute(1, 2, 0))
-                        canvas = util.to_numpy(z_canvas[i, :3].permute(1, 2, 0))
-                        self.writer.add_image(str(self.env.imgid[i]) + '_foreground/_target.png', gt, log)
-                        self.writer.add_image(str(self.env.imgid[i]) + '_foreground/_canvas.png', canvas, log)
+                        if self.use_bilevel:
+                            # # also write foreground images
+                            gt = util.to_numpy(z_gt[i, :3].permute(1, 2, 0))
+                            canvas = util.to_numpy(z_canvas[i, :3].permute(1, 2, 0))
+                            self.writer.add_image(str(self.env.imgid[i]) + '_foreground/_target.png', gt, log)
+                            self.writer.add_image(str(self.env.imgid[i]) + '_foreground/_canvas.png', canvas, log)
 
     def step(self, action):
         with torch.no_grad():

@@ -149,7 +149,7 @@ def train(agent, evaluate, writer, args, gpu, distributed):
 
 def setup(args):
     os.environ['MASTER_ADDR'] = 'localhost'
-    os.environ['MASTER_PORT'] = '12355'
+    os.environ['MASTER_PORT'] = '12354'
 
     # initialize the process group
     dist.init_process_group("nccl", rank=args.rank, world_size=args.world_size)
