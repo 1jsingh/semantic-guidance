@@ -18,7 +18,7 @@ To this end, we propose a Semantic Guidance pipeline with **1)** a bi-level pain
 
 
 ## Demo
-Our method shows high performance even when facing high variance in position, scale and saliency of the foreground objects.
+Traditional reinforcement learning based methods for the "*learning to paint*" problem, show poor performance on real world datasets with high variance in position, scale and saliency of the foreground objects. To address this we propose a semantic guidance pipeline, which distills object awareness knowledge into the painting process, and thereby learns to generate semantically accurate canvases under adverse painting conditions.
 
 | Target Image     | Baseline (Huang et al. 2019) | Semantic Guidance (Ours)  |
 |:-------------:|:-------------:|:-------------:|
