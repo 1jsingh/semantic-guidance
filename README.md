@@ -136,14 +136,14 @@ gdown https://drive.google.com/uc?id=1OvN7yRia44nhD16KmjcAvxG8xICWl42p
 gdown https://drive.google.com/uc?id=173p2rUQlNpp8fLA3u5s24QKJLU68QTkw
 ```
 
-* The final directory structure should look as follows,
-```bash
-semantic-guidance
-├── semantic_guidance/
-│   └── pretrained_models/
-│       └── actor_baseline.pkl
-│       └── actor_semantic_guidance.pkl
-```
+    * The final directory structure should look as follows,
+    ```bash
+    semantic-guidance
+    ├── semantic_guidance/
+    │   └── pretrained_models/
+    │       └── actor_baseline.pkl
+    │       └── actor_semantic_guidance.pkl
+    ```
 
 * Generate the painting sequence using pretrained baseline agent.
 ```bash
