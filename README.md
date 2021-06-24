@@ -37,7 +37,7 @@ conda activate semantic-guidance
 ```
 
 ### Dataset and Preprocessing
-* Download [CUB-200-2011 Birds](http://www.vision.caltech.edu/visipedia/CUB-200.html) dataset and place it in the `data/cub200/CUB_200_2011/` folder.
+* Download [CUB-200-2011 Birds](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) dataset and place it in the `data/cub200/CUB_200_2011/` folder.
 ```bash
 data
 ├── cub200/
