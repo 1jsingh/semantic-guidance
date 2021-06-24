@@ -7,6 +7,7 @@ dependencies:
   - ca-certificates=2020.7.22=0
   - certifi=2020.6.20=py36_0
   - freetype=2.10.2=h5ab3b9f_0
+  - gdown=3.13.0=pyhd8ed1ab_0
   - gmp=6.1.2=h6c8ec71_1
   - gnutls=3.6.5=h71b1129_1002
   - htop=2.2.0=hf8c457e_1000
@@ -81,7 +82,6 @@ dependencies:
     - nbformat==5.0.7
     - notebook==6.1.3
     - numpy==1.19.1
-    - nvidia-htop==1.0
     - oauthlib==3.1.0
     - opencv-python==4.4.0.42
     - packaging==20.4
@@ -97,7 +97,6 @@ dependencies:
     - ptyprocess==0.6.0
     - pyasn1==0.4.8
     - pyasn1-modules==0.2.8
-    - pycocotools==2.0
     - pycparser==2.20
     - pygments==2.6.1
     - pyparsing==2.4.7

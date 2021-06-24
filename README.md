@@ -37,42 +37,66 @@ conda activate semantic-guidance
 ```
 
 ### Dataset and Preprocessing
-* Download [CUB-200-2011 Birds](http://www.vision.caltech.edu/visipedia/CUB-200.html) dataset and place it in the `data/cub200/CUB_200_2011/` folder.
+* Download [CUB-200-2011 Birds](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) dataset and place it in the `data/cub200/CUB_200_2011/` folder.
 ```bash
-data
-├── cub200/
-│   └── CUB_200_2011/
-│       └── images/
-│             └── ...
-│       └── images.txt
+mkdir -p data/cub200 && cd data/cub200
+gdown https://drive.google.com/uc?id=1hbzc_P1FuxMkcabkgn9ZKinBwW683j45
+tar -xvzf CUB_200_2011.tgz
 ```
 
-* Download differentiable neural renderer: [renderer.pkl](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EWdoJgGzUJtEt1Qc_LkS9DwBj-bwem_I2BMT-W4VzcEuNw?e=3MUUBL) and place it in the `data/.` folder.
+    * The final data folder looks as follows,
+    ```bash
+    data
+    ├── cub200/
+    │   └── CUB_200_2011/
+    │       └── images/
+    │             └── ...
+    │       └── images.txt
+    ```
 
-* Download combined model for object localization and semantic segmentation from [here](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EbzRihTmKhtAjlXW-U5l8sUB751nZDGJQ4qXF4dk2wVV3A?e=yO0WGM), and place it in place it in the `data/.` folder.
-
-* Run the preprocessing script to generate object localization, semantic segmentation and bounding box predictions.
+* Download differentiable neural renderer: [renderer.pkl](https://drive.google.com/file/d/1VloSGAWYRiVYv3bRfBuB0uKj2m7Cyzu8/view?usp=sharing) and place it in the `data/.` folder.
 ```bash
-cd semantic_guidance
-python preprocess.py
+cd data
+gdown https://drive.google.com/uc?id=1VloSGAWYRiVYv3bRfBuB0uKj2m7Cyzu8
 ```
 
-* **OR** you can also directly download the preprocessed birds dataset from [here](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EY0RrfqyE2FEsaWFyBm5Mt4BUDc8M7d7XjarBKsU3SXqEQ), and place the prediction folders in the original data directory. The final data directory should look like:
+* Download combined model for object localization and semantic segmentation from [here](https://drive.google.com/file/d/14CIdpem-85y53KkkW2oBspXh-2PPXtTs/view?usp=sharing), and place it in place it in the `data/.` folder.
 ```bash
-data
-├── cub200/
-│   └── CUB_200_2011/
-│       └── images/
-│             └── ...
-│       └── segmentations_pred/
-│             └── ...
-│       └── gbp_global/
-│             └── ...
-│       └── bounding_boxes_pred.txt
-│       └── images.txt
-└── renderer.pkl
-└── birds_obj_seg.pkl
+cd data
+gdown https://drive.google.com/uc?id=14CIdpem-85y53KkkW2oBspXh-2PPXtTs
 ```
+
+* Choose one of the following options to get preprocessed data predictions (preprocessing helps faciliate faster training),
+    * **Option 1:** run the preprocessing script to generate object localization, semantic segmentation and bounding box predictions.
+    ```bash
+    cd semantic_guidance
+    python preprocess.py
+    ```
+
+    * **Option 2:** you can also directly download the preprocessed birds dataset from [here](https://drive.google.com/file/d/1s3lvo0Dn538lPghpXY1gEOTAZOTsojxJ/view?usp=sharing), and place the prediction folders in the original data directory.
+    ```bash
+    cd data/cub200/CUB_200_2011/
+    gdown https://drive.google.com/uc?id=1s3lvo0Dn538lPghpXY1gEOTAZOTsojxJ
+    unzip preprocessed-cub200-2011.zip
+    mv preprocessed-cub200-2011/* .
+    ```
+
+    -  The final data directory should look like:
+    ```bash
+    data
+    ├── cub200/
+    │   └── CUB_200_2011/
+    │       └── images/
+    │             └── ...
+    │       └── segmentations_pred/
+    │             └── ...
+    │       └── gbp_global/
+    │             └── ...
+    │       └── bounding_boxes_pred.txt
+    │       └── images.txt
+    └── renderer.pkl
+    └── birds_obj_seg.pkl
+    ```
 
 ### Training
 
@@ -104,7 +128,15 @@ python train.py \
 
 ### Testing using Pretrained Models
 
-* Download the pretrained models for the [Baseline](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EWoJ8_jprlRNvZegNCnBEnkBiLNG3SQKXPm119yJjB1mVg?e=HzK4sA) and [Semantic Guidance](https://anu365-my.sharepoint.com/:u:/g/personal/u7019589_anu_edu_au/EeUqajWhphlOg3EzXC8qYc8B090FMd2GYHSmjCdJ6bnmnA?e=cOTIHJ) agents. Place the downloaded models in `./semantic_guidance/pretrained_models` directory.
+* Download the pretrained models for the [Baseline](https://drive.google.com/file/d/1OvN7yRia44nhD16KmjcAvxG8xICWl42p/view?usp=sharing) and [Semantic Guidance](https://drive.google.com/file/d/173p2rUQlNpp8fLA3u5s24QKJLU68QTkw/view?usp=sharing) agents. Place the downloaded models in `./semantic_guidance/pretrained_models` directory.
+```bash
+cd semantic_guidance
+mkdir pretrained_models && cd pretrained_models
+gdown https://drive.google.com/uc?id=1OvN7yRia44nhD16KmjcAvxG8xICWl42p
+gdown https://drive.google.com/uc?id=173p2rUQlNpp8fLA3u5s24QKJLU68QTkw
+```
+
+* The final directory structure should look as follows,
 ```bash
 semantic-guidance
 ├── semantic_guidance/
