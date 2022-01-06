@@ -171,8 +171,9 @@ If you find this work useful in your research, please cite our paper:
 ```
 @inproceedings{singh2021combining,
   title={Combining Semantic Guidance and Deep Reinforcement Learning For Generating Human Level Paintings},
-  author={Jaskirat Singh and Liang Zheng},
-  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  author={Singh, Jaskirat and Zheng, Liang},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={16387--16396},
   year={2021}
 }
 ```
